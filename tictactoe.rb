@@ -1,6 +1,6 @@
 # Voici les règles du programme :
 
-#     le programme est à deux joueurs only (pas d'intelligence artificielle)
+#     le programme est à deux joueurs.
 # #maka 2 players: manontan anaran de mienregistre anarana [ atao naty array]
 # rah mbola tsisy de mangatak de ramis de mitoy hoaz
 
@@ -39,24 +39,24 @@ class Game
     #     BoardCase : c'est une case. Il devrait y avoir 9 instances de cette classe dans ta partie
     def selectcase(casecase, pion)
          case casecase
-             when "1"
-             $ttab1[0] = pion if $ttab1[0] != "X" || $ttab1[0] != "O"
+             when "1" 
+             $ttab1[0] = pion if $ttab1[0] == " "
              when "2"
-             $ttab1[2] = pion if $ttab1[2] != "X" || $ttab1[2] != "O"
+             $ttab1[2] = pion if $ttab1[2] == " "
              when "3"
-             $ttab1[4] = pion if $ttab1[4] != "X" || $ttab1[4] != "O"
+             $ttab1[4] = pion if $ttab1[4] == " "
              when "4"
-             $ttab3[0] = pion if $ttab3[0] != "X" || $ttab3[0] != "O"
+             $ttab3[0] = pion if $ttab3[0] == " "
              when "5"
-             $ttab3[2] = pion if $ttab3[2] != "X" || $ttab3[2] != "O"
+             $ttab3[2] = pion if $ttab3[2] == " "
              when "6"
-             $ttab3[4] = pion if $ttab3[4] != "X" || $ttab3[4] != "O"
+             $ttab3[4] = pion if $ttab3[4] == " "
              when "7"
-             $ttab5[0] = pion if $ttab5[0] != "X" || $ttab5[0] != "O"
+             $ttab5[0] = pion if $ttab5[0] == " "
              when "8"
-             $ttab5[2] = pion if $ttab5[2] != "X" || $ttab5[2] != "O"
+             $ttab5[2] = pion if $ttab5[2] == " "
              when "9"
-             $ttab5[4] = pion if $ttab5[4] != "X" || $ttab5[4] != "O"
+             $ttab5[4] = pion if $ttab5[4] == " "
            else
              puts "Choisir entre 1 à 9 selon le dessin à coté"
              chgtjoueur
@@ -131,38 +131,95 @@ class Game
         board
         chgtjoueur
     end
+    def verif_case(vvr)
+      if vvr == "X"
+          puts "vous etes le champion #{$joueur1}"
+          rejouer
+        elsif vvr == "O"
+          puts "vous etes le champion #{$joueur2}"
+          rejouer
+      end
+    end
     def gameover
       # fin si match nul ou un gagnant
+      # tav est l'equivalent des 9 cases du table de jeu
      tav = [$ttab1[0], $ttab1[2], $ttab1[4], $ttab3[0], $ttab3[2],$ttab3[4], $ttab5[0], $ttab5[2], $ttab5[4]]
      long = tav.select { |x| x == "X" || x == "O"}
+     # tous les variable 'var' sont les trois cases verticales, horizontales, ou diagonales ; unes d'elles sont remplient si un joueur gagne
        var1 = tav[0, 3]
-       long1 = var1.select { |x| x == "X"}
+       long1 = var1.select { |x| x == "X"} #si les trois cases long1 sont remplient de "X", length avec "X" = 3
+       long11 = var1.select { |x| x == "O"} #si les trois cases long1 sont remplient de "O", length avec "0" = 3
        var2 = tav[3, 3]
        long2 = var2.select { |x| x == "X"}
+       long22 = var2.select { |x| x == "O"}
        var3 = tav[6, 3]
        long3 = var3.select { |x| x == "X"}
-       # A METTRE A JOUR
-       # var4 = tav[0] + tav[3] + tav[6]
-       # long4 = var4.select { |x| x == "X" || x == "O"}
-       # var5 = tav[1] + tav[4] + tav[7]
-       # long5 = var5.select { |x| x == "X" || x == "O"}
-       # var6 = tav[2] + tav[5] + tav[8]
-       # long6 = var6.select { |x| x == "X" || x == "O"}
-       # var7 = tav[0] + tav[5] + tav[8]
-       # long7 = var7.select { |x| x == "X" || x == "O"}
-       # var8 = tav[2] + tav[5] + tav[6]
-       # long8 = var8.select { |x| x == "X" || x == "O"}
+       long33 = var3.select { |x| x == "O"}
+       var4 = []
+       var4[0] = tav[0]
+       var4[1] = tav[3]
+       var4[2] = tav[6]
+       long4 = var4.select { |x| x == "X"}
+       long44 = var4.select { |x| x == "O"}
+       var5 = []
+       var5[0] = tav[1]
+       var5[1] = tav[4]
+       var5[2] = tav[7]
+       long5 = var5.select { |x| x == "X"}
+       long55 = var5.select { |x| x == "O"}
+       var6 = []
+       var6[0] = tav[2]
+       var6[1] = tav[5]
+       var6[2] = tav[8]
+       long6 = var6.select { |x| x == "X"}
+       long66 = var6.select { |x| x == "O"}
+       var7 = []
+       var7[0] = tav[0]
+       var7[1] = tav[4]
+       var7[2] = tav[8]
+       long7 = var7.select { |x| x == "X"}
+       long77 = var7.select { |x| x == "O"}
+       var8 = []
+       var8[0] = tav[2]
+       var8[1] = tav[4]
+       var8[2] = tav[6]
+       long8 = var8.select { |x| x == "X"}
+       long88 = var8.select { |x| x == "O"}
        if long.length == 9
          puts "match nul, voulez vous rejouer"
          rejouer
        elsif long1.length == 3
-         if var1[0] == "X"
-           puts "vous etes le champion #{$joueur1}"
-           rejouer
-         else
-           puts "vous etes le champion #{$joueur2}"
-           rejouer
-         end
+         verif_case(var1[0])
+       elsif long11.length == 3
+         verif_case(var1[0])
+       elsif long2.length == 3
+         verif_case(var2[0])
+       elsif long22.length == 3
+         verif_case(var2[0])
+       elsif long3.length == 3
+         verif_case(var3[0])
+       elsif long33.length == 3
+         verif_case(var3[0])
+       elsif long4.length == 3
+         verif_case(var4[0])
+       elsif long44.length == 3
+         verif_case(var4[0])
+       elsif long5.length == 3
+         verif_case(var5[0])
+       elsif long55.length == 3
+         verif_case(var5[0])
+       elsif long6.length == 3
+         verif_case(var6[0])
+       elsif long66.length == 3
+         verif_case(var6[0])
+       elsif long7.length == 3
+         verif_case(var7[0])
+       elsif long77.length == 3
+         verif_case(var7[0])
+       elsif long8.length == 3
+         verif_case(var8[0])
+       elsif long88.length == 3
+         verif_case(var8[0])          
        end
      end
      def rejouer
@@ -183,10 +240,6 @@ class Game
 end
  t = Game.new
  t.iza
-
-
-# Du coup, je t'invite à dessiner tes classes, que doivent-elles faire, que doivent-elles lancer à leur initialisation ? Chacune des classes doit répondre à un but précis. Nous te conseillons de prendre un peu de temps à dessiner le but de tes classes avant de te lancer à tête baissée dans le code.
-# 2. Niveau : j'ai envie de réfléchir, mais pas trop non plus
 
 # Commence par définir tes classes. Chaque classe doit avoir des rôles bien précis :
 
